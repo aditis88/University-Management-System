@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Main.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AIIMSPortal</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">Main.java</span></div><h1>Main.java</h1><pre class="source lang-java linenums">package org.example;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+<span class="nc" id="L7">public class Main {</span>
+
+//    public static boolean inputTaker()
+//    {
+//        System.out.print(&quot;:~$ &quot;);
+//        return true;
+//    }
+
+    public static boolean printMainMenu() {
+
+<span class="fc" id="L17">        String title = &quot;LOGIN ROLE&quot;;</span>
+<span class="fc" id="L18">        ArrayList&lt;ArrayList&lt;String&gt;&gt; arr = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L20">        ArrayList&lt;String&gt; row = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L21">        ArrayList&lt;String&gt; row1 = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L22">        ArrayList&lt;String&gt; row2 = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L23">        ArrayList&lt;String&gt; row3 = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L25">        row.add(&quot;Login as&quot;);</span>
+<span class="fc" id="L26">        row.add(&quot;role&quot;);</span>
+<span class="fc" id="L27">        arr.add(row);</span>
+
+<span class="fc" id="L29">        row1.add(&quot;Student&quot;);</span>
+<span class="fc" id="L30">        row1.add(&quot;student&quot;);</span>
+
+<span class="fc" id="L32">        arr.add(row1);</span>
+
+<span class="fc" id="L34">        row2.add(&quot;Instructor&quot;);</span>
+<span class="fc" id="L35">        row2.add(&quot;faculty&quot;);</span>
+
+<span class="fc" id="L37">        arr.add(row2);</span>
+
+<span class="fc" id="L39">        row3.add(&quot;Admin&quot;);</span>
+<span class="fc" id="L40">        row3.add(&quot;office&quot;);</span>
+<span class="fc" id="L41">        arr.add(row3);</span>
+
+<span class="fc" id="L43">        CLI.printMenu(title,arr);</span>
+
+<span class="fc" id="L45">        return true;</span>
+
+    }
+
+    public static void main(String[] args) {
+
+
+<span class="nc" id="L52">        Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L53">        String exitSymbol = &quot;exit&quot;;</span>
+        String input;
+<span class="nc" id="L55">        Authenticator authenticator = new Authenticator();</span>
+<span class="nc" id="L56">        String userId = &quot;&quot;;</span>
+<span class="nc" id="L57">        String password = &quot;&quot;;</span>
+        while (true) {
+<span class="nc" id="L59">            System.out.println(&quot;For login Select Role...&quot;);</span>
+<span class="nc" id="L60">            printMainMenu();</span>
+
+//            System.out.print(&quot;:~$ &quot;);
+<span class="nc" id="L63">            CLI.inputTaker();</span>
+<span class="nc" id="L64">            input = scanner.nextLine();</span>
+<span class="nc" id="L65">            input = CLI.removeSpacesCLI(input);</span>
+
+<span class="nc bnc" id="L67" title="All 2 branches missed.">            if (input.equals(exitSymbol)) {</span>
+<span class="nc" id="L68">                System.out.println(&quot;Exiting AIMS Portal...&quot;);</span>
+<span class="nc" id="L69">                break;</span>
+            }
+
+<span class="nc" id="L72">            System.out.println(&quot;Enter UserName&quot;);</span>
+<span class="nc" id="L73">            CLI.inputTaker();</span>
+
+<span class="nc" id="L75">            userId = scanner.nextLine();</span>
+<span class="nc" id="L76">            userId = CLI.removeSpacesCLI(userId);</span>
+//            userId = &quot;gunturi@iitrpr.ac.in&quot;;
+<span class="nc" id="L78">            userId = &quot;2020csb1101@iitrpr.ac.in&quot;;</span>
+//            userId = &quot;staffdeanoffice@iitrpr.ac.in&quot;;
+<span class="nc" id="L80">            System.out.println(userId);</span>
+
+
+<span class="nc" id="L83">            System.out.println(&quot;Enter Password&quot;);</span>
+<span class="nc" id="L84">            CLI.inputTaker();</span>
+//                scanner.next();
+<span class="nc" id="L86">            password = scanner.nextLine();</span>
+//            password = &quot;*+r_4RJ:%qMHE.-K&quot;;-
+<span class="nc" id="L88">            password = CLI.removeSpacesCLI(password);</span>
+<span class="nc" id="L89">            password = &quot;7(G])@&amp;r&quot;;</span>
+//            password = &quot;6AC(rWZk&quot;;
+
+<span class="nc" id="L92">            System.out.println(password);</span>
+
+<span class="nc" id="L94">            boolean isCorrect = authenticator.authenticate(userId, input, password);</span>
+
+<span class="nc bnc" id="L96" title="All 2 branches missed.">            if (input.equals(&quot;student&quot;)) {</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">                if (isCorrect) {</span>
+<span class="nc" id="L98">                    System.out.println(&quot;Student Logged in succesfully!&quot;);</span>
+
+                    try {
+<span class="nc" id="L101">                        Student.runStudent(userId);</span>
+<span class="nc" id="L102">                    } catch (Exception err) {</span>
+<span class="nc" id="L103">                        System.out.println(err.getMessage());</span>
+<span class="nc" id="L104">                    }</span>
+                    }
+            }
+<span class="nc bnc" id="L107" title="All 2 branches missed.">            else if (input.equals(&quot;faculty&quot;)) {</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">                if (isCorrect) {</span>
+<span class="nc" id="L109">                    System.out.println(&quot;Faculty Logged in succesfully!&quot;);</span>
+
+                    try {
+<span class="nc" id="L112">                        Instructor.runFaculty(userId);</span>
+
+<span class="nc" id="L114">                    } catch (Exception err) {</span>
+<span class="nc" id="L115">                        System.out.println(err.getMessage());</span>
+<span class="nc" id="L116">                    }</span>
+                }
+            }
+<span class="nc bnc" id="L119" title="All 2 branches missed.">            else if (input.equals(&quot;office&quot;)) {</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">                if (isCorrect) {</span>
+<span class="nc" id="L121">                    System.out.println(&quot;Officer Logged in succesfully!&quot;);</span>
+
+                    try {
+<span class="nc" id="L124">                        AcademicOffice.runOffice(userId);</span>
+<span class="nc" id="L125">                    } catch (Exception err) {</span>
+<span class="nc" id="L126">                        System.out.println(err.getMessage());</span>
+<span class="nc" id="L127">                    }</span>
+
+                }
+                else {
+<span class="nc" id="L131">                    System.out.println(&quot;Wrong Login!&quot;);</span>
+                }
+            } else {
+<span class="nc" id="L134">                System.out.println(&quot;Invalid Role!&quot;);</span>
+            }
+
+
+                    // Do something with the input
+//            System.out.println(&quot;You entered: &quot; + input);
+
+<span class="nc" id="L141">                    CLI.clearScreen();</span>
+<span class="nc" id="L142">        }</span>
+
+
+<span class="nc" id="L145">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

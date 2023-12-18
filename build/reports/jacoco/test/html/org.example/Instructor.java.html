@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Instructor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AIIMSPortal</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">Instructor.java</span></div><h1>Instructor.java</h1><pre class="source lang-java linenums">package org.example;
+
+import javax.xml.transform.Result;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Instructor extends AbstractCommonFunctions{
+<span class="fc" id="L15">    protected Connection con = null;</span>
+    public String instructorId;
+    Instructor(String id )
+<span class="fc" id="L18">    {</span>
+<span class="fc" id="L19">        id = removeSpaces(id);</span>
+<span class="fc" id="L20">        this.instructorId = id;</span>
+<span class="fc" id="L21">        GetConnection gtCon = new GetConnection();</span>
+<span class="fc" id="L22">        this.con = gtCon.getConnection();</span>
+<span class="fc" id="L23">    }</span>
+    boolean isCourseFloatActive()
+    {
+<span class="fc" id="L26">        String query = &quot;Select * from current_session&quot;;</span>
+        ResultSet rs ;
+<span class="fc" id="L28">        boolean isActive = false;</span>
+        try
+        {
+<span class="fc" id="L31">            PreparedStatement preparedStatement = this.con.prepareStatement(query);</span>
+<span class="fc" id="L32">            rs = preparedStatement.executeQuery();</span>
+<span class="fc" id="L33">            rs.next();</span>
+<span class="fc" id="L34">            int status = rs.getInt(&quot;status&quot;);</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">            if(status == this.COURSEFLOATACTIVE)</span>
+            {
+<span class="fc" id="L37">                isActive = true;</span>
+            }
+
+        }
+<span class="nc" id="L41">        catch(SQLException err)</span>
+        {
+<span class="nc" id="L43">            System.out.println(err.getMessage());</span>
+<span class="fc" id="L44">        }</span>
+<span class="fc" id="L45">        return isActive;</span>
+    }
+    protected boolean floatCourse(String course_id,String dept_id,double min_cgpa)
+    {
+<span class="fc" id="L49">        boolean isActive = isCourseFloatActive();</span>
+<span class="fc" id="L50">        course_id = removeSpaces(course_id);</span>
+<span class="fc" id="L51">        course_id = course_id.toUpperCase();</span>
+<span class="fc" id="L52">        String instructor_id = this.instructorId;</span>
+<span class="fc" id="L53">        dept_id = removeSpaces(dept_id);</span>
+<span class="fc" id="L54">        dept_id = dept_id.toUpperCase();</span>
+//        System.out.println(isActive);
+
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        if(!checkCourseDepartment(this.con,course_id,dept_id) )</span>
+        {
+<span class="fc" id="L59">            System.out.println(&quot;The course and department that you have given are not compatible!&quot;);</span>
+<span class="fc" id="L60">            return false;</span>
+        }
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        if(isActive)</span>
+        {
+<span class="fc" id="L64">            String query = &quot;insert into course_offering (instructor_id,course_id,dept_id,min_cgpa ) values (?,?,?,?)&quot;;</span>
+            try{
+<span class="fc" id="L66">                PreparedStatement preparedStatement = this.con.prepareStatement(query);</span>
+
+<span class="fc" id="L68">                preparedStatement.setString(1,instructor_id);</span>
+<span class="fc" id="L69">                preparedStatement.setString(2,course_id);</span>
+<span class="fc" id="L70">                preparedStatement.setString(3,dept_id);</span>
+<span class="fc" id="L71">                preparedStatement.setDouble(4,min_cgpa);</span>
+
+<span class="fc" id="L73">                preparedStatement.execute();</span>
+<span class="fc" id="L74">                System.out.println(&quot;Course floated successfully!&quot;);</span>
+
+            }
+<span class="nc" id="L77">            catch(SQLException err)</span>
+            {
+<span class="nc" id="L79">                System.out.println(err.getMessage());</span>
+<span class="nc" id="L80">                return false;</span>
+<span class="fc" id="L81">            }</span>
+<span class="fc" id="L82">        }</span>
+        else
+        {
+<span class="fc" id="L85">            System.out.println(&quot;Sorry you cannot float courses now!!&quot;);</span>
+<span class="fc" id="L86">            return false;</span>
+        }
+<span class="fc" id="L88">        return true;</span>
+    }
+
+    protected boolean deFloatCourse(String course_id,String dept_id)
+    {
+<span class="fc" id="L93">        boolean isActive = isCourseFloatActive();</span>
+<span class="fc" id="L94">        course_id = removeSpaces(course_id);</span>
+<span class="fc" id="L95">        String instructor_id = this.instructorId;</span>
+<span class="fc" id="L96">        dept_id = removeSpaces(dept_id);</span>
+//        System.out.println(isActive);
+<span class="fc bfc" id="L98" title="All 2 branches covered.">        if(!checkCourseDepartment(this.con,course_id,dept_id))</span>
+        {
+<span class="fc" id="L100">            System.out.println(&quot;The course and department that you have given are not compatible!&quot;);</span>
+<span class="fc" id="L101">            return false;</span>
+        }
+<span class="fc bfc" id="L103" title="All 2 branches covered.">        if(isActive)</span>
+        {
+<span class="fc" id="L105">            String query = &quot;delete from course_offering where instructor_id = ? and  course_id = ? and dept_id = ? &quot;;</span>
+            try{
+<span class="fc" id="L107">                PreparedStatement preparedStatement = this.con.prepareStatement(query);</span>
+
+<span class="fc" id="L109">                preparedStatement.setString(1,instructor_id);</span>
+<span class="fc" id="L110">                preparedStatement.setString(2,course_id);</span>
+<span class="fc" id="L111">                preparedStatement.setString(3,dept_id);</span>
+//                preparedStatement.setDouble(4,min_cgpa);
+
+<span class="fc" id="L114">                preparedStatement.execute();</span>
+<span class="fc" id="L115">                System.out.println(&quot;Course defloated successfully!&quot;);</span>
+
+            }
+<span class="nc" id="L118">            catch(SQLException err)</span>
+            {
+<span class="nc" id="L120">                System.out.println(err.getMessage());</span>
+<span class="nc" id="L121">                return false;</span>
+<span class="fc" id="L122">            }</span>
+<span class="fc" id="L123">        }</span>
+        else
+        {
+<span class="fc" id="L126">            System.out.println(&quot;Sorry you cannot defloat courses now!!&quot;);</span>
+<span class="fc" id="L127">            return false;</span>
+        }
+<span class="fc" id="L129">        return true;</span>
+    }
+    private boolean changeProfileNumber(String contact)
+    {
+<span class="fc" id="L133">        contact = removeSpaces(contact);</span>
+<span class="fc" id="L134">        String updateQuery = &quot;update instructor set contact = ? where instructor_id = ? &quot;;</span>
+        try{
+<span class="fc" id="L136">            PreparedStatement preparedStatement = this.con.prepareStatement(updateQuery);</span>
+<span class="fc" id="L137">            preparedStatement.setString(1,removeSpaces(contact));</span>
+<span class="fc" id="L138">            preparedStatement.setString(2,removeSpaces(this.instructorId));</span>
+
+<span class="fc" id="L140">            preparedStatement.execute();</span>
+<span class="fc" id="L141">            preparedStatement.close();</span>
+
+<span class="nc" id="L143">        }catch(SQLException err)</span>
+        {
+<span class="nc" id="L145">            System.out.println(err.getMessage());</span>
+<span class="nc" id="L146">            return false;</span>
+<span class="fc" id="L147">        }</span>
+<span class="fc" id="L148">        return true;</span>
+    }
+
+    private boolean changeProfileName(String name)
+    {
+<span class="fc" id="L153">        name = removeSpaces(name);</span>
+<span class="fc" id="L154">        String updateQuery = &quot;update instructor set instructor_name = ? where instructor_id = ? &quot;;</span>
+        try{
+<span class="fc" id="L156">            PreparedStatement preparedStatement = this.con.prepareStatement(updateQuery);</span>
+<span class="fc" id="L157">            preparedStatement.setString(1,removeSpaces(name));</span>
+<span class="fc" id="L158">            preparedStatement.setString(2,removeSpaces(this.instructorId));</span>
+
+<span class="fc" id="L160">            preparedStatement.execute();</span>
+<span class="fc" id="L161">            preparedStatement.close();</span>
+<span class="nc" id="L162">        }catch(SQLException err)</span>
+        {
+<span class="nc" id="L164">            System.out.println(err.getMessage());</span>
+<span class="nc" id="L165">            return false;</span>
+<span class="fc" id="L166">        }</span>
+<span class="fc" id="L167">        return true;</span>
+
+    }
+    private boolean isGradesAlreadyAssigned(int year,String student_id,String course_id,String sem,Double credits)
+    {
+<span class="fc" id="L172">        boolean ans = false;</span>
+<span class="fc" id="L173">        student_id = removeSpaces(student_id);</span>
+<span class="fc" id="L174">        course_id = removeSpaces(course_id);</span>
+<span class="fc" id="L175">        int semester = Integer.parseInt(removeSpaces(sem));</span>
+
+<span class="fc" id="L177">        String findQuery = &quot;Select * from student_record_&quot;+String.valueOf(year)+&quot; where student_id = ? and course_id = ? and semester = ? and credits = ?&quot;;</span>
+        try{
+<span class="fc" id="L179">            PreparedStatement preparedStatement = this.con.prepareStatement(findQuery);</span>
+<span class="fc" id="L180">            preparedStatement.setString(1,student_id);</span>
+<span class="fc" id="L181">            preparedStatement.setString(2,course_id);</span>
+<span class="fc" id="L182">            preparedStatement.setInt(3,semester);</span>
+<span class="fc" id="L183">            preparedStatement.setDouble(4,credits);</span>
+
+<span class="fc" id="L185">            ResultSet rs = preparedStatement.executeQuery();</span>
+<span class="fc bfc" id="L186" title="All 2 branches covered.">            if(rs.next())</span>
+            {
+<span class="fc" id="L188">                ans = true;</span>
+            }
+<span class="fc" id="L190">            rs.close();</span>
+<span class="fc" id="L191">            preparedStatement.close();</span>
+
+<span class="fc" id="L193">        }catch(SQLException err)</span>
+        {
+<span class="fc" id="L195">            System.out.println(err.getMessage());</span>
+<span class="fc" id="L196">        }</span>
+
+<span class="fc" id="L198">        return ans;</span>
+    }
+    boolean isGradesSubmissionStarted()
+    {
+<span class="fc" id="L202">        String query = String.format(&quot;select * from current_session&quot;);</span>
+<span class="fc" id="L203">        boolean isStarted = false;</span>
+
+        try{
+<span class="fc" id="L206">            PreparedStatement preparedStatement = this.con.prepareStatement(query);</span>
+<span class="fc" id="L207">            ResultSet rs = preparedStatement.executeQuery();</span>
+<span class="fc" id="L208">            rs.next();</span>
+<span class="fc" id="L209">            int status = rs.getInt(&quot;status&quot;);</span>
+<span class="fc bfc" id="L210" title="All 2 branches covered.">            if(status == this.GRADESUBMITSART)</span>
+            {
+<span class="fc" id="L212">                isStarted = true;</span>
+            }
+
+<span class="nc" id="L215">        }catch(SQLException err)</span>
+        {
+<span class="nc" id="L217">            System.out.println(err.getMessage());</span>
+<span class="nc" id="L218">            return false;</span>
+<span class="fc" id="L219">        }</span>
+<span class="fc" id="L220">        return isStarted;</span>
+    }
+
+    protected boolean giveGrades(String csvFile,int year)
+    {
+<span class="fc" id="L225">        String insertQuery = &quot;insert into student_record_&quot;+String.valueOf(year)+&quot; (student_id, course_id,semester,grades,credits) values (?,?,?,?,?)&quot;;</span>
+<span class="fc" id="L226">        String updateQuery = &quot;update student_record_&quot;+String.valueOf(year)+&quot; set grades = ? where student_id = ? and course_id = ? and semester = ? and credits = ?&quot;;</span>
+<span class="fc" id="L227">        boolean submitGrade = isGradesSubmissionStarted();</span>
+<span class="fc bfc" id="L228" title="All 2 branches covered.">        if(!submitGrade)</span>
+        {
+<span class="fc" id="L230">            System.out.println(&quot;Grades submission has not started yet!&quot;);</span>
+<span class="fc" id="L231">            return false;</span>
+        }
+        try {
+
+<span class="fc" id="L235">            Connection connection = this.con;</span>
+<span class="fc" id="L236">            PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);</span>
+
+<span class="fc" id="L238">            BufferedReader br = new BufferedReader(new FileReader(csvFile));</span>
+            String line;
+<span class="fc" id="L240">            br.readLine();</span>
+<span class="fc bfc" id="L241" title="All 2 branches covered.">            while ((line = br.readLine()) != null) {</span>
+<span class="fc" id="L242">                String[] data = line.split(&quot;,&quot;);</span>
+
+<span class="fc" id="L244">                String std_id = removeSpaces(data[0]);</span>
+<span class="fc" id="L245">                String course_id = removeSpaces(data[1]);</span>
+<span class="fc" id="L246">                int sem = Integer.parseInt(removeSpaces(data[2]));</span>
+<span class="fc" id="L247">                String grades = removeSpaces(data[3]);</span>
+
+<span class="fc" id="L249">                double cred = fetchCourseCredits(this.con, data[1],year);</span>
+
+<span class="fc" id="L251">                String query = String.format(&quot;insert into student_record_%d (student_id, course_id,semester,grades,credits) values ('%s','%s',%d,'%s',%.2f)&quot;,year,std_id,course_id,sem,grades,cred );</span>
+//                System.out.println(Arrays.toString(data));
+//                System.out.println(query);
+
+<span class="fc" id="L255">                preparedStatement = this.con.prepareStatement(query);</span>
+
+<span class="fc bfc" id="L257" title="All 2 branches covered.">                if(!isGradesAlreadyAssigned(year,data[0],data[1],data[2],cred))</span>
+                {
+<span class="fc" id="L259">                    preparedStatement.execute();</span>
+                }
+                else {
+                    //update the grades
+<span class="fc" id="L263">                    preparedStatement = this.con.prepareStatement(updateQuery);</span>
+
+<span class="fc" id="L265">                    preparedStatement.setString(1,data[3]);</span>
+
+<span class="fc" id="L267">                    preparedStatement.setString(2, removeSpaces(data[0]));</span>
+<span class="fc" id="L268">                    preparedStatement.setString(3, removeSpaces(data[1]));</span>
+<span class="fc" id="L269">                    preparedStatement.setInt(4, Integer.parseInt(removeSpaces(data[2])));</span>
+<span class="fc" id="L270">                    preparedStatement.setDouble(5, cred);</span>
+
+<span class="fc" id="L272">                    preparedStatement.executeUpdate();</span>
+                }
+<span class="fc" id="L274">            }</span>
+
+<span class="fc" id="L276">            preparedStatement.close();</span>
+<span class="fc" id="L277">            System.out.println(&quot;Grades UPDATED/INSERTED successfully!&quot;);</span>
+
+<span class="fc" id="L279">        } catch (Exception e) {</span>
+<span class="fc" id="L280">            e.printStackTrace();</span>
+<span class="fc" id="L281">            return false;</span>
+
+<span class="fc" id="L283">        }</span>
+<span class="fc" id="L284">        return true;</span>
+    }
+
+
+protected boolean seeGrades(int year)
+{
+<span class="fc" id="L290">    String findQuery = &quot;Select * from student_record_&quot;+String.valueOf(year)+&quot; &quot;;</span>
+    try{
+<span class="fc" id="L292">        PreparedStatement preparedStatement = this.con.prepareStatement(findQuery);</span>
+<span class="fc" id="L293">        ResultSet rs = preparedStatement.executeQuery();</span>
+<span class="fc" id="L294">        printResultTable(rs);</span>
+<span class="fc" id="L295">    }catch(SQLException err)</span>
+    {
+<span class="fc" id="L297">        System.out.println(err.getMessage());</span>
+<span class="fc" id="L298">        return false;</span>
+<span class="fc" id="L299">    }</span>
+<span class="fc" id="L300">    return true;</span>
+}
+
+    boolean printMainMenu()
+    {
+<span class="fc" id="L305">        ArrayList&lt;ArrayList&lt;String&gt;&gt; mainMenu = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L306">        String title = &quot;MAIN MENU&quot;;</span>
+<span class="fc" id="L307">        ArrayList&lt;String&gt; row = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L309">        row.add(&quot;Options&quot;);</span>
+<span class="fc" id="L310">        row.add(&quot;Enter Choice&quot;);</span>
+<span class="fc" id="L311">        mainMenu.add(row);</span>
+
+<span class="fc" id="L313">        row = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L314">        row.add(&quot;Change Profile&quot;);</span>
+<span class="fc" id="L315">        row.add(&quot;1&quot;);</span>
+<span class="fc" id="L316">        mainMenu.add(row);</span>
+
+<span class="fc" id="L318">        row = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L319">        row.add(&quot;See Grades&quot;);</span>
+<span class="fc" id="L320">        row.add(&quot;2&quot;);</span>
+<span class="fc" id="L321">        mainMenu.add(row);</span>
+
+<span class="fc" id="L323">        row = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L324">        row.add(&quot;See Course Catalogue&quot;);</span>
+<span class="fc" id="L325">        row.add(&quot;3&quot;);</span>
+<span class="fc" id="L326">        mainMenu.add(row);</span>
+
+<span class="fc" id="L328">        row = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L329">        row.add(&quot;Grade Upload through CSV file&quot;);</span>
+<span class="fc" id="L330">        row.add(&quot;4&quot;);</span>
+<span class="fc" id="L331">        mainMenu.add(row);</span>
+
+<span class="fc" id="L333">        row = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L334">        row.add(&quot;Course Float&quot;);</span>
+<span class="fc" id="L335">        row.add(&quot;5&quot;);</span>
+<span class="fc" id="L336">        mainMenu.add(row);</span>
+
+<span class="fc" id="L338">        row = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L339">        row.add(&quot;Course Defloat&quot;);</span>
+<span class="fc" id="L340">        row.add(&quot;6&quot;);</span>
+<span class="fc" id="L341">        mainMenu.add(row);</span>
+
+<span class="fc" id="L343">        row = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L344">        row.add(&quot;View Event&quot;);</span>
+<span class="fc" id="L345">        row.add(&quot;7&quot;);</span>
+<span class="fc" id="L346">        mainMenu.add(row);</span>
+
+<span class="fc" id="L348">        row = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L349">        row.add(&quot;See Course Offering&quot;);</span>
+<span class="fc" id="L350">        row.add(&quot;8&quot;);</span>
+<span class="fc" id="L351">        mainMenu.add(row);</span>
+
+<span class="fc" id="L353">        CLI.printMenu(title,mainMenu);</span>
+
+<span class="fc" id="L355">        return true;</span>
+    }
+boolean printSeeGradesMenu()
+{
+<span class="fc" id="L359">    ArrayList&lt;ArrayList&lt;String&gt;&gt; gradesMenu = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L360">    String title = &quot;GRADES MENU&quot;;</span>
+<span class="fc" id="L361">    ArrayList&lt;String&gt; row = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L363">    row.add(&quot;Options&quot;);</span>
+<span class="fc" id="L364">    row.add(&quot;Enter Choice&quot;);</span>
+<span class="fc" id="L365">    gradesMenu.add(row);</span>
+
+<span class="fc" id="L367">    row = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L368">    row.add(&quot;See grades by year&quot;);</span>
+<span class="fc" id="L369">    row.add(&quot;1&quot;);</span>
+<span class="fc" id="L370">    gradesMenu.add(row);</span>
+
+<span class="fc" id="L372">    row = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L373">    row.add(&quot;See Grades by entry number&quot;);</span>
+<span class="fc" id="L374">    row.add(&quot;2&quot;);</span>
+<span class="fc" id="L375">    gradesMenu.add(row);</span>
+
+
+<span class="fc" id="L378">    CLI.printMenu(title,gradesMenu);</span>
+
+<span class="fc" id="L380">    return true;</span>
+
+}
+
+
+
+    boolean logOut()  {
+        try{
+<span class="fc" id="L388">            this.con.close();</span>
+<span class="fc" id="L389">            System.out.println(&quot;Instructor Successfully logged out!&quot;);</span>
+<span class="nc" id="L390">        }catch(SQLException err)</span>
+        {
+<span class="nc" id="L392">            System.out.println(err.getMessage());</span>
+<span class="fc" id="L393">        }</span>
+<span class="fc" id="L394">        return true;</span>
+    }
+    public static  void runFaculty(String UserId)  {
+<span class="fc" id="L397">        Instructor prof = new Instructor(UserId);</span>
+//        prof.viewCourseCatalogue(prof.con);
+//        prof.floatCourse(&quot;CS555&quot;,&quot;gunturi@iitrpr.ac.in&quot;,&quot;CSE&quot;,7.0);
+//        prof.changeProfileNumber(&quot;999999999&quot;);
+//        prof.changeProfileName(&quot;Dr. Venkata M Viswanath Gunturi&quot;);
+//        prof.deFloatCourse(&quot;CS555&quot;,&quot;gunturi@iitrpr.ac.in&quot;,&quot;CSE&quot;,7.0);
+//        prof.giveGrades(csvFile,2020);
+//        prof.seeGrades(2023,&quot;2020ceb1033@iitrpr.ac.in&quot;);
+//    prof.floatCourse(&quot;DM101&quot;,prof.instructorId,&quot;CSE&quot;,7);
+
+//        String csvFile = &quot;/home/ashish/hdd/study/java_proj/AIIMSPortal/src/main/java/org/example/seedData/student_grades.csv&quot;;
+<span class="fc" id="L408">        String csvFile = &quot;&quot;;</span>
+<span class="fc" id="L409">        String input = &quot;&quot;;</span>
+<span class="fc" id="L410">        String exitSymbol = &quot;exit&quot;;</span>
+<span class="fc" id="L411">        Scanner scanner = new Scanner(System.in);</span>
+
+        while(true)
+        {
+<span class="fc" id="L415">            prof.printMainMenu();</span>
+<span class="fc" id="L416">            CLI.inputTaker();</span>
+<span class="fc" id="L417">            input = scanner.nextLine();</span>
+<span class="fc" id="L418">            input = removeSpaces(input);</span>
+
+<span class="fc bfc" id="L420" title="All 2 branches covered.">            if (input.equals(exitSymbol)) {</span>
+<span class="fc" id="L421">                System.out.println(&quot;Exiting Faculty Menu..&quot;);</span>
+<span class="fc" id="L422">                break;</span>
+            }
+<span class="fc bfc" id="L424" title="All 2 branches covered.">            if(input.equals(&quot;1&quot;))</span>
+            {
+
+<span class="fc" id="L427">                String profile = &quot;&quot;;</span>
+<span class="fc" id="L428">                prof.printChangeProfileMenu();</span>
+                while(true)
+                {
+<span class="fc" id="L431">                    prof.printChangeProfileMenu();</span>
+<span class="fc" id="L432">                    System.out.println(&quot;Enter exit to go back or any other string to proceed&quot;);</span>
+<span class="fc" id="L433">                    CLI.inputTaker();</span>
+<span class="fc" id="L434">                    profile = scanner.nextLine();</span>
+<span class="fc" id="L435">                    profile = removeSpaces(profile);</span>
+<span class="fc bfc" id="L436" title="All 2 branches covered.">                    if(profile.equals(exitSymbol))</span>
+                    {
+<span class="fc" id="L438">                        System.out.println(&quot;Exiting Change Profile Menu..&quot;);</span>
+<span class="fc" id="L439">                        break;</span>
+                    }
+<span class="fc bfc" id="L441" title="All 2 branches covered.">                    if(profile.equals(&quot;1&quot;))</span>
+                    {
+<span class="fc" id="L443">                        System.out.println(&quot;Enter New Name&quot;);</span>
+<span class="fc" id="L444">                        CLI.inputTaker();</span>
+<span class="fc" id="L445">                        String name = scanner.nextLine();</span>
+<span class="fc" id="L446">                        prof.changeProfileName(name);</span>
+<span class="fc" id="L447">                        System.out.println(&quot;Name Changed Successfully&quot;);</span>
+
+<span class="fc bfc" id="L449" title="All 2 branches covered.">                    }else if(profile.equals(&quot;2&quot;))</span>
+                    {
+<span class="fc" id="L451">                        System.out.println(&quot;Enter New Phone Number&quot;);</span>
+<span class="fc" id="L452">                        CLI.inputTaker();</span>
+<span class="fc" id="L453">                        String number = scanner.nextLine();</span>
+<span class="fc" id="L454">                        prof.changeProfileNumber(number);</span>
+<span class="fc" id="L455">                        System.out.println(&quot;Number Changed Successfully&quot;);</span>
+<span class="fc" id="L456">                    }else {</span>
+<span class="fc" id="L457">                        System.out.println(&quot;Invalid Choice!&quot;);</span>
+                    }
+<span class="fc" id="L459">                    CLI.clearScreen();</span>
+                }
+<span class="fc" id="L461">            }</span>
+<span class="fc bfc" id="L462" title="All 2 branches covered.">            else if(input.equals(&quot;2&quot;))</span>
+            {
+<span class="fc" id="L464">                String input1 = &quot;&quot;;</span>
+                while(true)
+                {
+<span class="fc" id="L467">                    System.out.println(&quot;Enter exit to go back or any other string to proceed:&quot;);</span>
+<span class="fc" id="L468">                    prof.printSeeGradesMenu();</span>
+<span class="fc" id="L469">                    CLI.inputTaker();</span>
+<span class="fc" id="L470">                    input1 = scanner.nextLine();</span>
+<span class="fc" id="L471">                    input1 = removeSpaces(input1);</span>
+<span class="fc bfc" id="L472" title="All 2 branches covered.">                    if(input1.equals(exitSymbol))</span>
+                    {
+<span class="fc" id="L474">                        System.out.println(&quot;Exiting See Grades Menu..&quot;);</span>
+<span class="fc" id="L475">                        break;</span>
+                    }
+<span class="fc" id="L477">                    CLI.inputTaker();</span>
+<span class="fc" id="L478">                    input1 = scanner.nextLine();</span>
+
+<span class="fc bfc" id="L480" title="All 2 branches covered.">                    if(input1.equals(&quot;1&quot;))</span>
+                    {
+<span class="fc" id="L482">                        System.out.println(&quot;Enter Year:&quot;);</span>
+<span class="fc" id="L483">                        CLI.inputTaker();</span>
+<span class="fc" id="L484">                        String year = scanner.nextLine();</span>
+<span class="fc" id="L485">                        year = removeSpaces(year);</span>
+                        try{
+<span class="fc" id="L487">                            prof.seeGrades(Integer.parseInt(year));</span>
+<span class="nc" id="L488">                        }catch(Exception err)</span>
+                        {
+<span class="nc" id="L490">                            System.out.println(err.getMessage());</span>
+<span class="fc" id="L491">                        }</span>
+
+<span class="fc bfc" id="L493" title="All 2 branches covered.">                    }else if(input1.equals(&quot;2&quot;))</span>
+                    {
+<span class="fc" id="L495">                        System.out.println(&quot;Enter Student ID&quot;);</span>
+<span class="fc" id="L496">                        CLI.inputTaker();</span>
+<span class="fc" id="L497">                        String id = scanner.nextLine();</span>
+<span class="fc" id="L498">                        id = removeSpaces(id);</span>
+<span class="fc" id="L499">                        int admYear = extractIntegral(id);</span>
+<span class="fc" id="L500">                        prof.seeGrades(prof.con,admYear,id);</span>
+<span class="fc" id="L501">                    }else {</span>
+<span class="fc" id="L502">                        System.out.println(&quot;Invalid Choice!&quot;);</span>
+                    }
+<span class="fc" id="L504">                    CLI.clearScreen();</span>
+
+                }
+<span class="fc" id="L507">            }</span>
+<span class="fc bfc" id="L508" title="All 2 branches covered.">            else if(input.equals(&quot;3&quot;))</span>
+            {
+<span class="fc" id="L510">                prof.viewCourseCatalogue(prof.con);</span>
+            }
+<span class="fc bfc" id="L512" title="All 2 branches covered.">            else if(input.equals(&quot;4&quot;))</span>
+            {
+<span class="fc" id="L514">                String input1 = &quot;&quot;;</span>
+               while(true)
+               {
+<span class="fc" id="L517">                   System.out.println(&quot;Enter exit to go back or any other string to move forward&quot;);</span>
+<span class="fc" id="L518">                   CLI.inputTaker();</span>
+<span class="fc" id="L519">                   input1 = scanner.nextLine();</span>
+<span class="fc bfc" id="L520" title="All 2 branches covered.">                   if(input1.equals(exitSymbol))</span>
+                   {
+<span class="fc" id="L522">                       System.out.println(&quot;Exiting give grades Menu&quot;);</span>
+<span class="fc" id="L523">                       break;</span>
+                   }
+<span class="fc" id="L525">                   System.out.println(&quot;Enter the year of the students whom grades you want to upload:&quot;);</span>
+<span class="fc" id="L526">                   CLI.inputTaker();</span>
+<span class="fc" id="L527">                   String year = scanner.nextLine();</span>
+<span class="fc" id="L528">                   System.out.println(&quot;Give the path of the file&quot;);</span>
+<span class="fc" id="L529">                   CLI.inputTaker();</span>
+<span class="fc" id="L530">                   csvFile = scanner.nextLine();</span>
+                   try{
+<span class="fc" id="L532">                       prof.giveGrades(csvFile,Integer.parseInt(year));</span>
+<span class="nc" id="L533">                   }catch(Exception err)</span>
+                   {
+<span class="nc" id="L535">                       System.out.println(err.getMessage());</span>
+<span class="fc" id="L536">                   }</span>
+<span class="fc" id="L537">               }</span>
+<span class="fc" id="L538">            }</span>
+<span class="fc bfc" id="L539" title="All 2 branches covered.">            else if(input.equals(&quot;5&quot;))</span>
+            {
+<span class="fc" id="L541">                String input1 = &quot;&quot;;</span>
+                while(true)
+                {
+<span class="fc" id="L544">                    System.out.println(&quot;Enter exit to go back or any other string to move forward&quot;);</span>
+<span class="fc" id="L545">                    CLI.inputTaker();</span>
+<span class="fc" id="L546">                    input1 = scanner.nextLine();</span>
+<span class="fc bfc" id="L547" title="All 2 branches covered.">                    if(input1.equals(exitSymbol))</span>
+                    {
+<span class="fc" id="L549">                        System.out.println(&quot;Exiting Course Float Menu&quot;);</span>
+<span class="fc" id="L550">                        break;</span>
+                    }
+//                    floatCourse(String course_id,String dept_id,double min_cgpa)
+<span class="fc" id="L553">                    System.out.println(&quot;Enter the Course ID&quot;);</span>
+<span class="fc" id="L554">                    CLI.inputTaker();</span>
+<span class="fc" id="L555">                    String course_id = scanner.nextLine();</span>
+
+<span class="fc" id="L557">                    System.out.println(&quot;Enter the department of the Course&quot;);</span>
+<span class="fc" id="L558">                    CLI.inputTaker();</span>
+<span class="fc" id="L559">                    String dept_id = scanner.nextLine();</span>
+
+<span class="fc" id="L561">                    System.out.println(&quot;Enter the minimum CGPA Required to take this course&quot;);</span>
+<span class="fc" id="L562">                    CLI.inputTaker();</span>
+<span class="fc" id="L563">                    String min_cgpa = scanner.nextLine();</span>
+
+                    try{
+<span class="fc" id="L566">                      prof.floatCourse(course_id,dept_id,Double.parseDouble(min_cgpa));</span>
+
+<span class="nc" id="L568">                    }catch(Exception err)</span>
+                    {
+<span class="nc" id="L570">                        System.out.println(&quot;Course Not Floated!&quot;);</span>
+<span class="nc" id="L571">                        System.out.println(err.getMessage());</span>
+<span class="fc" id="L572">                    }</span>
+
+<span class="fc" id="L574">                }</span>
+<span class="fc" id="L575">            }</span>
+<span class="fc bfc" id="L576" title="All 2 branches covered.">            else if(input.equals(&quot;6&quot;))</span>
+            {
+<span class="fc" id="L578">                String input1 = &quot;&quot;;</span>
+                while(true)
+                {
+<span class="fc" id="L581">                    System.out.println(&quot;Enter exit to go back or any other string to move forward&quot;);</span>
+<span class="fc" id="L582">                    CLI.inputTaker();</span>
+<span class="fc" id="L583">                    input1 = scanner.nextLine();</span>
+<span class="fc bfc" id="L584" title="All 2 branches covered.">                    if(input1.equals(exitSymbol))</span>
+                    {
+<span class="fc" id="L586">                        System.out.println(&quot;Exiting Course Defloat Menu&quot;);</span>
+<span class="fc" id="L587">                        break;</span>
+                    }
+//                    deFloatCourse(String course_id,String dept_id)
+<span class="fc" id="L590">                    System.out.println(&quot;Enter the Course ID for defloating:&quot;);</span>
+<span class="fc" id="L591">                    CLI.inputTaker();</span>
+<span class="fc" id="L592">                    String course_id = scanner.nextLine();</span>
+
+<span class="fc" id="L594">                    System.out.println(&quot;Enter the department of the Course&quot;);</span>
+<span class="fc" id="L595">                    CLI.inputTaker();</span>
+<span class="fc" id="L596">                    String dept_id = scanner.nextLine();</span>
+
+
+                    try{
+<span class="fc" id="L600">                        prof.deFloatCourse(course_id,dept_id);</span>
+
+<span class="nc" id="L602">                    }catch(Exception err)</span>
+                    {
+<span class="nc" id="L604">                        System.out.println(&quot;Course Not Floated!&quot;);</span>
+<span class="nc" id="L605">                        System.out.println(err.getMessage());</span>
+<span class="fc" id="L606">                    }</span>
+
+<span class="fc" id="L608">                }</span>
+
+<span class="fc bfc" id="L610" title="All 2 branches covered.">            }else if(input.equals(&quot;7&quot;))</span>
+            {
+<span class="fc" id="L612">                prof.viewEvent(prof.con);</span>
+            }
+<span class="fc bfc" id="L614" title="All 2 branches covered.">            else if(input.equals(&quot;8&quot;))</span>
+            {
+<span class="fc" id="L616">                prof.viewCourseOffering(prof.con);</span>
+            }
+            else{
+<span class="fc" id="L619">                System.out.println(&quot;Invalid Option! enter again!&quot;);</span>
+            }
+<span class="fc" id="L621">            CLI.clearScreen();</span>
+        }
+
+
+<span class="fc" id="L625">        prof.logOut();</span>
+
+<span class="fc" id="L627">    }</span>
+
+//    public static void main(String[] args) throws SQLException {
+//        Instructor prof = new Instructor(&quot;gunturi@iitrpr.ac.in&quot;);
+//
+//        prof.runFaculty(prof.instructorId);
+//
+////        prof.giveGrades(&quot;/home/ashish/hdd/study/java_proj/AIIMSPortal/src/main/java/org/example/seedData/give_grades_test.csv&quot;,2020);
+//        prof.logOut();
+//    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

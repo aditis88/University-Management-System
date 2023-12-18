@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CsvToDatabase.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AIIMSPortal</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">CsvToDatabase.java</span></div><h1>CsvToDatabase.java</h1><pre class="source lang-java linenums">package org.example;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+<span class="fc" id="L11">public class CsvToDatabase {</span>
+
+    public static String removeSpaces(String text)
+    {
+<span class="fc" id="L15">        Pattern pattern = Pattern.compile(&quot;(?m)^\\s*(.*?)\\s*$&quot;);</span>
+<span class="fc" id="L16">        Matcher matcher = pattern.matcher(text);</span>
+<span class="fc" id="L17">        String extractedString = null;</span>
+<span class="pc bpc" id="L18" title="1 of 2 branches missed.">        if (matcher.find()) {</span>
+<span class="fc" id="L19">            extractedString = matcher.group(1);</span>
+        }
+<span class="fc" id="L21">        return extractedString;</span>
+    }
+    public static boolean fillUserTable()
+    {
+<span class="fc" id="L25">        String csvFile = &quot;/home/ashish/hdd/study/java_proj/UniversityManagementSystem/src/main/java/org/example/seedData/user_data.csv&quot;;</span>
+
+<span class="fc" id="L27">        String insertQuery = &quot;insert into user_table (user_id, role,contact, password) values (?,?, ?, ?)&quot;;</span>
+<span class="fc" id="L28">        GetConnection gtCon = new GetConnection();</span>
+<span class="fc" id="L29">        try (Connection connection = gtCon.getConnection();</span>
+<span class="fc" id="L30">             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);</span>
+<span class="fc" id="L31">             BufferedReader br = new BufferedReader(new FileReader(csvFile))) {</span>
+
+            String line;
+
+<span class="fc" id="L35">            line = br.readLine();</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">            while ((line = br.readLine()) != null) {</span>
+<span class="fc" id="L37">                String[] data = line.split(&quot;,&quot;);</span>
+
+<span class="fc" id="L39">                preparedStatement.setString(1, removeSpaces(data[4]));</span>
+<span class="fc" id="L40">                preparedStatement.setString(2, removeSpaces(data[2]));</span>
+<span class="fc" id="L41">                preparedStatement.setString(3, removeSpaces(data[5]));</span>
+<span class="fc" id="L42">                preparedStatement.setString(4, removeSpaces(data[6]));</span>
+
+//                preparedStatement.executeUpdate();
+<span class="fc" id="L45">            }</span>
+<span class="fc" id="L46">            connection.close();</span>
+<span class="fc" id="L47">            System.out.println(&quot;Data inserted successfully into the database.&quot;);</span>
+
+<span class="nc" id="L49">        } catch (Exception e) {</span>
+<span class="nc" id="L50">            e.printStackTrace();</span>
+<span class="fc" id="L51">        }</span>
+<span class="fc" id="L52">        return true;</span>
+    }
+    public static boolean fillDepartmentTable()
+    {
+<span class="fc" id="L56">        String csvFile = &quot;/home/ashish/hdd/study/java_proj/UniversityManagementSystem/src/main/java/org/example/seedData/department.csv&quot;;</span>
+
+<span class="fc" id="L58">        String insertQuery = &quot;insert into department (dept_name,dept_id,building) values (?,?,?)&quot;;</span>
+<span class="fc" id="L59">        GetConnection gtCon = new GetConnection();</span>
+<span class="fc" id="L60">        try (Connection connection = gtCon.getConnection();</span>
+<span class="fc" id="L61">             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);</span>
+<span class="fc" id="L62">             BufferedReader br = new BufferedReader(new FileReader(csvFile))) {</span>
+
+            String line;
+
+<span class="fc" id="L66">            br.readLine();</span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">            while ((line = br.readLine()) != null) {</span>
+<span class="fc" id="L68">                String[] data = line.split(&quot;,&quot;);</span>
+
+<span class="fc" id="L70">                preparedStatement.setString(1, removeSpaces(data[0]));</span>
+<span class="fc" id="L71">                preparedStatement.setString(2, removeSpaces(data[1]));</span>
+<span class="fc" id="L72">                preparedStatement.setString(3, removeSpaces(data[2]));</span>
+
+
+//                preparedStatement.executeUpdate();
+<span class="fc" id="L76">            }</span>
+<span class="fc" id="L77">            connection.close();</span>
+<span class="fc" id="L78">            System.out.println(&quot;Data inserted successfully into the database.&quot;);</span>
+
+<span class="nc" id="L80">        } catch (Exception e) {</span>
+<span class="nc" id="L81">            e.printStackTrace();</span>
+<span class="fc" id="L82">        }</span>
+<span class="fc" id="L83">        return true;</span>
+    }
+    public static boolean fillInstructorTable()
+    {
+<span class="fc" id="L87">        String csvFile = &quot;/home/ashish/hdd/study/java_proj/UniversityManagementSystem/src/main/java/org/example/seedData/instructor.csv&quot;;</span>
+
+<span class="fc" id="L89">        String insertQuery = &quot;insert into instructor (instructor_id,instructor_name,dept_id,salary) values (?,?,?,?)&quot;;</span>
+<span class="fc" id="L90">        GetConnection gtCon = new GetConnection();</span>
+<span class="fc" id="L91">        try (Connection connection = gtCon.getConnection();</span>
+<span class="fc" id="L92">             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);</span>
+<span class="fc" id="L93">             BufferedReader br = new BufferedReader(new FileReader(csvFile))) {</span>
+
+            String line;
+
+<span class="fc" id="L97">            br.readLine();</span>
+<span class="fc bfc" id="L98" title="All 2 branches covered.">            while ((line = br.readLine()) != null) {</span>
+<span class="fc" id="L99">                String[] data = line.split(&quot;,&quot;);</span>
+
+<span class="fc" id="L101">                preparedStatement.setString(1, removeSpaces(data[0]));</span>
+<span class="fc" id="L102">                preparedStatement.setString(2, removeSpaces(data[1]));</span>
+<span class="fc" id="L103">                preparedStatement.setString(3, removeSpaces(data[2]));</span>
+<span class="fc" id="L104">                preparedStatement.setFloat(4, Float.parseFloat(removeSpaces(data[3])));</span>
+
+
+//                preparedStatement.executeUpdate();
+<span class="fc" id="L108">            }</span>
+<span class="fc" id="L109">            connection.close();</span>
+<span class="fc" id="L110">            System.out.println(&quot;Data inserted successfully into the database.&quot;);</span>
+
+<span class="nc" id="L112">        } catch (Exception e) {</span>
+<span class="nc" id="L113">            e.printStackTrace();</span>
+<span class="fc" id="L114">        }</span>
+<span class="fc" id="L115">        return true;</span>
+    }
+
+    public static boolean fillCourseCatalogueTable()
+    {
+<span class="fc" id="L120">        String csvFile = &quot;/home/ashish/hdd/study/java_proj/UniversityManagementSystem/src/main/java/org/example/seedData/course_catalogue.csv&quot;;</span>
+
+
+<span class="fc" id="L123">        String insertQueryCat = &quot;insert into course_catalogue (course_id, title,dept_id, req_sem,l,t,p,credits,course_type,batch) values (?,?,?,?,?,?,?,?,?,?)&quot;;</span>
+<span class="fc" id="L124">        GetConnection gtCon = new GetConnection();</span>
+<span class="fc" id="L125">        try (Connection connection = gtCon.getConnection();</span>
+<span class="fc" id="L126">             PreparedStatement preparedStatement = connection.prepareStatement(insertQueryCat);</span>
+<span class="fc" id="L127">             BufferedReader br = new BufferedReader(new FileReader(csvFile))) {</span>
+
+            String line;
+
+<span class="fc" id="L131">            br.readLine();</span>
+<span class="fc bfc" id="L132" title="All 2 branches covered.">            while ((line = br.readLine()) != null) {</span>
+<span class="fc" id="L133">                String[] data = line.split(&quot;,&quot;);</span>
+//                System.out.println(Arrays.toString(data));
+<span class="fc" id="L135">                preparedStatement.setString(1, removeSpaces(data[0]));</span>
+<span class="fc" id="L136">                preparedStatement.setString(2, removeSpaces(data[1]));</span>
+<span class="fc" id="L137">                preparedStatement.setString(3, removeSpaces(data[2]));</span>
+<span class="fc" id="L138">                preparedStatement.setInt(4, Integer.parseInt(removeSpaces(data[3])));</span>
+<span class="fc" id="L139">                preparedStatement.setFloat(5, Float.parseFloat(removeSpaces(data[4])));</span>
+<span class="fc" id="L140">                preparedStatement.setFloat(6, Float.parseFloat(removeSpaces(data[5])));</span>
+<span class="fc" id="L141">                preparedStatement.setFloat(7, Float.parseFloat(removeSpaces(data[6])));</span>
+<span class="fc" id="L142">                preparedStatement.setFloat(8, Float.parseFloat(removeSpaces(data[7])));</span>
+<span class="fc" id="L143">                preparedStatement.setString(9, removeSpaces(data[8]));</span>
+<span class="fc" id="L144">                preparedStatement.setInt(10,Integer.parseInt(removeSpaces(data[9])));</span>
+
+
+//                preparedStatement.execute();
+<span class="fc" id="L148">            }</span>
+<span class="fc" id="L149">            connection.close();</span>
+<span class="fc" id="L150">            System.out.println(&quot;Data inserted successfully into the database.&quot;);</span>
+
+<span class="nc" id="L152">        } catch (Exception e) {</span>
+<span class="nc" id="L153">            e.printStackTrace();</span>
+<span class="fc" id="L154">        }</span>
+<span class="fc" id="L155">        return true;</span>
+    }
+    public static boolean fillCourseTable()
+    {
+<span class="fc" id="L159">        String csvFile = &quot;/home/ashish/hdd/study/java_proj/UniversityManagementSystem/src/main/java/org/example/seedData/course.csv&quot;;</span>
+
+
+<span class="fc" id="L162">        String insertQueryCat = &quot;insert into course (course_id, title,dept_id, req_sem,l,t,p,credits) values (?,?,?,?,?,?,?,?)&quot;;</span>
+<span class="fc" id="L163">        GetConnection gtCon = new GetConnection();</span>
+<span class="fc" id="L164">        try (Connection connection = gtCon.getConnection();</span>
+<span class="fc" id="L165">             PreparedStatement preparedStatement = connection.prepareStatement(insertQueryCat);</span>
+<span class="fc" id="L166">             BufferedReader br = new BufferedReader(new FileReader(csvFile))) {</span>
+
+            String line;
+
+<span class="fc" id="L170">            br.readLine();</span>
+<span class="fc bfc" id="L171" title="All 2 branches covered.">            while ((line = br.readLine()) != null) {</span>
+<span class="fc" id="L172">                String[] data = line.split(&quot;,&quot;);</span>
+//                System.out.println(Arrays.toString(data));
+<span class="fc" id="L174">                preparedStatement.setString(1, removeSpaces(data[0]));</span>
+<span class="fc" id="L175">                preparedStatement.setString(2, removeSpaces(data[1]));</span>
+<span class="fc" id="L176">                preparedStatement.setString(3, removeSpaces(data[2]));</span>
+<span class="fc" id="L177">                preparedStatement.setInt(4, Integer.parseInt(removeSpaces(data[3])));</span>
+<span class="fc" id="L178">                preparedStatement.setFloat(5, Float.parseFloat(removeSpaces(data[4])));</span>
+<span class="fc" id="L179">                preparedStatement.setFloat(6, Float.parseFloat(removeSpaces(data[5])));</span>
+<span class="fc" id="L180">                preparedStatement.setFloat(7, Float.parseFloat(removeSpaces(data[6])));</span>
+<span class="fc" id="L181">                preparedStatement.setFloat(8, Float.parseFloat(removeSpaces(data[7])));</span>
+
+
+//                preparedStatement.execute();
+<span class="fc" id="L185">            }</span>
+<span class="fc" id="L186">            connection.close();</span>
+<span class="fc" id="L187">            System.out.println(&quot;Data inserted successfully into the database.&quot;);</span>
+
+<span class="nc" id="L189">        } catch (Exception e) {</span>
+<span class="nc" id="L190">            e.printStackTrace();</span>
+<span class="fc" id="L191">        }</span>
+<span class="fc" id="L192">        return true;</span>
+    }
+    static boolean fillPrereqTable()
+    {
+<span class="fc" id="L196">        String csvFile = &quot;/home/ashish/hdd/study/java_proj/UniversityManagementSystem/src/main/java/org/example/seedData/prereq.csv&quot;;</span>
+
+<span class="fc" id="L198">        String insertQuery = &quot;insert into prereq (course_id,prereq_id) values (?,?)&quot;;</span>
+<span class="fc" id="L199">        GetConnection gtCon = new GetConnection();</span>
+<span class="fc" id="L200">        try (Connection connection = gtCon.getConnection();</span>
+<span class="fc" id="L201">             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);</span>
+<span class="fc" id="L202">             BufferedReader br = new BufferedReader(new FileReader(csvFile))) {</span>
+
+            String line;
+            String course_id,prerq_id;
+
+<span class="fc" id="L207">            br.readLine();</span>
+<span class="fc bfc" id="L208" title="All 2 branches covered.">            while ((line = br.readLine()) != null) {</span>
+<span class="fc" id="L209">                String[] data = line.split(&quot;,&quot;);</span>
+
+<span class="fc" id="L211">                course_id =  removeSpaces(data[0]).toUpperCase();</span>
+<span class="fc" id="L212">                prerq_id =  removeSpaces(data[1]).toUpperCase();</span>
+<span class="fc" id="L213">                preparedStatement.setString(1,course_id);</span>
+<span class="fc" id="L214">                preparedStatement.setString(2,prerq_id);</span>
+//                preparedStatement.execute();
+<span class="fc" id="L216">            }</span>
+<span class="fc" id="L217">            connection.close();</span>
+<span class="fc" id="L218">            preparedStatement.close();</span>
+<span class="fc" id="L219">            System.out.println(&quot;Data inserted successfully into the database.&quot;);</span>
+
+<span class="nc" id="L221">        } catch (Exception e) {</span>
+<span class="nc" id="L222">            e.printStackTrace();</span>
+<span class="nc" id="L223">            return false;</span>
+<span class="fc" id="L224">        }</span>
+<span class="fc" id="L225">        return true;</span>
+
+    }
+    public static boolean fillStudentTable()
+    {
+<span class="fc" id="L230">        String csvFile = &quot;/home/ashish/hdd/study/java_proj/UniversityManagementSystem/src/main/java/org/example/seedData/student.csv&quot;;</span>
+
+<span class="fc" id="L232">        String insertQuery = &quot;insert into student (student_id, student_name,dept_id, current_sem,contact) values (?,?,?,?,?)&quot;;</span>
+<span class="fc" id="L233">        GetConnection gtCon = new GetConnection();</span>
+<span class="fc" id="L234">        try (Connection connection = gtCon.getConnection();</span>
+<span class="fc" id="L235">             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);</span>
+<span class="fc" id="L236">             BufferedReader br = new BufferedReader(new FileReader(csvFile))) {</span>
+
+            String line;
+
+<span class="fc" id="L240">            br.readLine();</span>
+<span class="fc bfc" id="L241" title="All 2 branches covered.">            while ((line = br.readLine()) != null) {</span>
+<span class="fc" id="L242">                String[] data = line.split(&quot;,&quot;);</span>
+
+<span class="fc" id="L244">                preparedStatement.setString(1, removeSpaces(data[4]));</span>
+<span class="fc" id="L245">                preparedStatement.setString(2, removeSpaces(data[0]));</span>
+<span class="fc" id="L246">                preparedStatement.setString(3, removeSpaces(data[3]));</span>
+<span class="fc" id="L247">                preparedStatement.setInt(4, Integer.parseInt(removeSpaces(data[5])));</span>
+//                preparedStatement.setFloat(5, Float.parseFloat(removeSpaces(data[6])));
+<span class="fc" id="L249">                preparedStatement.setString(5, removeSpaces(data[7]));</span>
+
+
+//                preparedStatement.executeUpdate();
+<span class="fc" id="L253">            }</span>
+<span class="fc" id="L254">            connection.close();</span>
+<span class="fc" id="L255">            System.out.println(&quot;Data inserted successfully into the database.&quot;);</span>
+
+<span class="nc" id="L257">        } catch (Exception e) {</span>
+<span class="nc" id="L258">            e.printStackTrace();</span>
+<span class="nc" id="L259">            return false;</span>
+<span class="fc" id="L260">        }</span>
+<span class="fc" id="L261">        return true;</span>
+    }
+
+//    static boolean fillEnrolledCredits()
+//    {
+//
+//    }
+
+    public static void main(String[] args) {
+
+<span class="nc" id="L271">        fillUserTable();</span>
+<span class="nc" id="L272">        fillDepartmentTable();</span>
+<span class="nc" id="L273">        fillCourseCatalogueTable();</span>
+<span class="nc" id="L274">        fillCourseTable();</span>
+<span class="nc" id="L275">        fillInstructorTable();</span>
+<span class="nc" id="L276">        fillStudentTable();</span>
+<span class="nc" id="L277">        fillPrereqTable();</span>
+
+
+<span class="nc" id="L280">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

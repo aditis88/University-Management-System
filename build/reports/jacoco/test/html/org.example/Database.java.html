@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Database.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AIIMSPortal</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">Database.java</span></div><h1>Database.java</h1><pre class="source lang-java linenums">package org.example;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.Statement;
+
+<span class="nc" id="L8">public class Database {</span>
+    public boolean create()
+    {
+<span class="nc" id="L11">        Connection con = null;</span>
+        Statement st;
+        try {
+<span class="nc" id="L14">            GetConnection gtCon = new GetConnection();</span>
+<span class="nc" id="L15">            con = gtCon.getConnection();</span>
+<span class="nc" id="L16">            st = con.createStatement();</span>
+<span class="nc" id="L17">            drop_table(st);</span>
+<span class="nc" id="L18">            create_table(st);</span>
+<span class="nc" id="L19">            st.close();</span>
+<span class="nc" id="L20">            con.close();</span>
+        }
+<span class="nc" id="L22">        catch (Exception e) {</span>
+<span class="nc" id="L23">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L24">        }</span>
+<span class="nc" id="L25">        return true;</span>
+    }
+
+
+    void drop_table (Statement st) {
+        try {
+<span class="nc" id="L31">            String drop_file = &quot;/home/ashish/hdd/study/java_proj/AIIMSPortal/src/sqlSource/drop.sql&quot;;</span>
+<span class="nc" id="L32">            String drop = new String(Files.readAllBytes(Paths.get(drop_file)));</span>
+//            System.out.println(drop);
+<span class="nc" id="L34">            st.execute(drop);</span>
+        }
+<span class="nc" id="L36">        catch (Exception e) {</span>
+<span class="nc" id="L37">            System.out.println(&quot;drop Exception: &quot;+ e.getMessage());</span>
+<span class="nc" id="L38">        }</span>
+<span class="nc" id="L39">    }</span>
+
+    void create_table (Statement st) {
+        try {
+<span class="nc" id="L43">            String create_file = &quot;/home/ashish/hdd/study/java_proj/AIIMSPortal/src/sqlSource/create.sql&quot;;</span>
+<span class="nc" id="L44">            String create = new String(Files.readAllBytes(Paths.get(create_file)));</span>
+<span class="nc" id="L45">            st.execute(create);</span>
+        }
+<span class="nc" id="L47">        catch (Exception e) {</span>
+<span class="nc" id="L48">            System.out.println(&quot;Create Exception&quot;);</span>
+<span class="nc" id="L49">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L50">        }</span>
+<span class="nc" id="L51">    }</span>
+
+    public static void main(String[] args)
+    {
+<span class="nc" id="L55">        Database crtDb = new Database();</span>
+<span class="nc" id="L56">        crtDb.create();</span>
+<span class="nc" id="L57">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

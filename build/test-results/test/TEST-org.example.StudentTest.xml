@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.example.StudentTest" tests="31" skipped="0" failures="0" errors="0" timestamp="2023-03-08T14:45:35" hostname="ashish" time="1.543">
+  <properties/>
+  <testcase name="satisfyRequiredSem()" classname="org.example.StudentTest" time="0.001"/>
+  <testcase name="logOut()" classname="org.example.StudentTest" time="0.0"/>
+  <testcase name="runStudent5_6_1()" classname="org.example.StudentTest" time="0.049"/>
+  <testcase name="registerCourse()" classname="org.example.StudentTest" time="0.0"/>
+  <testcase name="satisfyCGPACriteria()" classname="org.example.StudentTest" time="0.0"/>
+  <testcase name="satisfyCreditLimitCUMUpdate()" classname="org.example.StudentTest" time="0.001"/>
+  <testcase name="runStudent7910()" classname="org.example.StudentTest" time="0.025"/>
+  <testcase name="checkIfFloated()" classname="org.example.StudentTest" time="0.013"/>
+  <testcase name="viewCourseOffering()" classname="org.example.StudentTest" time="0.002"/>
+  <testcase name="runStudent5_1()" classname="org.example.StudentTest" time="0.024"/>
+  <testcase name="runStudent5_2()" classname="org.example.StudentTest" time="0.032"/>
+  <testcase name="runStudent5_3()" classname="org.example.StudentTest" time="0.034"/>
+  <testcase name="runStudent5_4()" classname="org.example.StudentTest" time="0.034"/>
+  <testcase name="runStudent5_5()" classname="org.example.StudentTest" time="0.034"/>
+  <testcase name="runStudent5_6()" classname="org.example.StudentTest" time="0.045"/>
+  <testcase name="runStudent5_7()" classname="org.example.StudentTest" time="0.042"/>
+  <testcase name="runStudent8_1()" classname="org.example.StudentTest" time="0.024"/>
+  <testcase name="runStudent8_2()" classname="org.example.StudentTest" time="0.028"/>
+  <testcase name="printMainMenu()" classname="org.example.StudentTest" time="0.002"/>
+  <testcase name="runStudent1()" classname="org.example.StudentTest" time="0.024"/>
+  <testcase name="runStudent2()" classname="org.example.StudentTest" time="0.02"/>
+  <testcase name="runStudent3()" classname="org.example.StudentTest" time="0.019"/>
+  <testcase name="runStudent4()" classname="org.example.StudentTest" time="0.02"/>
+  <testcase name="runStudent6()" classname="org.example.StudentTest" time="0.019"/>
+  <testcase name="runStudent8()" classname="org.example.StudentTest" time="0.048"/>
+  <testcase name="deRegisterCourse()" classname="org.example.StudentTest" time="0.0"/>
+  <testcase name="runStudent()" classname="org.example.StudentTest" time="0.018"/>
+  <testcase name="isCourseRegistraionActive()" classname="org.example.StudentTest" time="0.003"/>
+  <testcase name="findCreditLimit()" classname="org.example.StudentTest" time="0.0"/>
+  <testcase name="satisfyPrerequisite()" classname="org.example.StudentTest" time="0.001"/>
+  <testcase name="runStudent11()" classname="org.example.StudentTest" time="0.027"/>
+  <system-out><![CDATA[┌┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┐
+├┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┤
+│course_id│title│dept_id│req_sem│l  │t  │p  │credits│course_type│batch│
+├┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┼┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┼┬┬┬┼┬┬┬┼┬┬┬┼┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┤
+├┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┤
+│DM102    │demo2│CSE    │1      │3.0│3.0│3.0│20.00  │pc         │2020 │
+└─────────┴─────┴───────┴───────┴───┴───┴───┴───────┴───────────┴─────┘
+Course floated successfully!
+┌┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┐
+├┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┤
+│course_id│title│dept_id│req_sem│l  │t  │p  │credits│course_type│batch│
+├┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┼┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┼┬┬┬┼┬┬┬┼┬┬┬┼┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┤
+├┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┤
+│DM102    │demo2│CSE    │1      │3.0│3.0│3.0│20.00  │pc         │2020 │
+└─────────┴─────┴───────┴───────┴───┴───┴───┴───────┴───────────┴─────┘
+Course defloated successfully!
+┌┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┐
+├┴┴┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┤
+│instructor_id│course_id│dept_id│min_cgpa│
+├┬┬┬┬┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┬┤
+└┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┘
+┌┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┐
+├┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┤
+│course_id│title│dept_id│req_sem│l  │t  │p  │credits│course_type│batch│
+├┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┼┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┼┬┬┬┼┬┬┬┼┬┬┬┼┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┤
+├┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┤
+│DM102    │demo2│CSE    │1      │3.0│3.0│3.0│20.00  │pc         │2020 │
+└─────────┴─────┴───────┴───────┴───┴───┴───┴───────┴───────────┴─────┘
+Course floated successfully!
+┌┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┐
+├┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┤
+│course_id│title           │dept_id│req_sem│l  │t  │p  │credits│course_type│batch│
+├┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┼┬┬┬┼┬┬┬┼┬┬┬┼┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┤
+├┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┤
+│CS302    │Algorithm Design│CSE    │5      │3.0│1.0│0.0│3.00   │PC         │2020 │
+└─────────┴────────────────┴───────┴───────┴───┴───┴───┴───────┴───────────┴─────┘
+Course floated successfully!
+┌┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┐
+├┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┤
+│course_id│title│dept_id│req_sem│l  │t  │p  │credits│course_type│batch│
+├┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┼┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┼┬┬┬┼┬┬┬┼┬┬┬┼┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┤
+├┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┤
+│DM102    │demo2│CSE    │1      │3.0│3.0│3.0│20.00  │pc         │2020 │
+└─────────┴─────┴───────┴───────┴───┴───┴───┴───────┴───────────┴─────┘
+Course floated successfully!
+┌┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┐
+├┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┤
+│course_id│title               │dept_id│req_sem│l  │t  │p  │credits│course_type│batch│
+├┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┼┬┬┬┼┬┬┬┼┬┬┬┼┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┤
+├┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┤
+│CS305    │software Engineering│CSE    │6      │3.0│3.0│3.0│3.00   │pc         │2020 │
+├─────────┼────────────────────┼───────┼───────┼───┼───┼───┼───────┼───────────┼─────┤
+│CS305    │software Engineering│CSE    │6      │3.0│3.0│3.0│2.00   │pc         │2019 │
+└─────────┴────────────────────┴───────┴───────┴───┴───┴───┴───────┴───────────┴─────┘
+Course floated successfully!
+┌──────────────────────────────────────┐
+│              MAIN MENU               │
+├─────────────────────────┬────────────┤
+│         Options         │Enter Choice│
+├─────────────────────────┼────────────┤
+│     Change Profile      │     1      │
+├─────────────────────────┼────────────┤
+│     See Your Grades     │     2      │
+├─────────────────────────┼────────────┤
+│ Calculate CGPA till now │     3      │
+├─────────────────────────┼────────────┤
+│  See Course Catalogue   │     4      │
+├─────────────────────────┼────────────┤
+│     Enroll a Course     │     5      │
+├─────────────────────────┼────────────┤
+│   View Current Event    │     6      │
+├─────────────────────────┼────────────┤
+│  Check for Graduation   │     7      │
+├─────────────────────────┼────────────┤
+│De Registration of Course│     8      │
+├─────────────────────────┼────────────┤
+│  View Course Offering   │     9      │
+├─────────────────────────┼────────────┤
+│  View Enrolled Courses  │     10     │
+└─────────────────────────┴────────────┘
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

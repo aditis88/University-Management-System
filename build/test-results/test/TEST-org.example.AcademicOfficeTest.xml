@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.example.AcademicOfficeTest" tests="19" skipped="0" failures="0" errors="0" timestamp="2023-03-08T14:45:32" hostname="ashish" time="0.729">
+  <properties/>
+  <testcase name="printResultTable()" classname="org.example.AcademicOfficeTest" time="0.16"/>
+  <testcase name="viewEvent()" classname="org.example.AcademicOfficeTest" time="0.008"/>
+  <testcase name="fetchCourseCredits()" classname="org.example.AcademicOfficeTest" time="0.008"/>
+  <testcase name="getCurrentEvent()" classname="org.example.AcademicOfficeTest" time="0.001"/>
+  <testcase name="getBtechProjCode()" classname="org.example.AcademicOfficeTest" time="0.004"/>
+  <testcase name="removeSpaces()" classname="org.example.AcademicOfficeTest" time="0.001"/>
+  <testcase name="calculateCGPA()" classname="org.example.AcademicOfficeTest" time="0.003"/>
+  <testcase name="calculateSGPA()" classname="org.example.AcademicOfficeTest" time="0.004"/>
+  <testcase name="fetchMinReqSem()" classname="org.example.AcademicOfficeTest" time="0.005"/>
+  <testcase name="isGraduated()" classname="org.example.AcademicOfficeTest" time="0.03"/>
+  <testcase name="seeGrades()" classname="org.example.AcademicOfficeTest" time="0.011"/>
+  <testcase name="getGradeValue()" classname="org.example.AcademicOfficeTest" time="0.001"/>
+  <testcase name="getBtechGradCred()" classname="org.example.AcademicOfficeTest" time="0.004"/>
+  <testcase name="extractIntegral()" classname="org.example.AcademicOfficeTest" time="0.001"/>
+  <testcase name="viewCourseCatalogue()" classname="org.example.AcademicOfficeTest" time="0.033"/>
+  <testcase name="checkCourseDepartment()" classname="org.example.AcademicOfficeTest" time="0.012"/>
+  <testcase name="printChangeProfileMenu()" classname="org.example.AcademicOfficeTest" time="0.002"/>
+  <testcase name="testCalculateCGPA()" classname="org.example.AcademicOfficeTest" time="0.003"/>
+  <testcase name="fetchCourseType()" classname="org.example.AcademicOfficeTest" time="0.003"/>
+  <system-out><![CDATA[┌┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┐
+├┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┤
+│admin_name│admin_id                    │contact  │
+├┬┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┬┬┤
+├┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┤
+│Staff     │staffdeanoffice@iitrpr.ac.in│999999999│
+└──────────┴────────────────────────────┴─────────┘
+┌────────────────────────────────────────────────────────┐
+│                   EVENT INFORMATION                    │
+├────────────┬───────────────┬───────────────────────────┤
+│Current Year│Current Session│       Current Event       │
+├────────────┼───────────────┼───────────────────────────┤
+│    2020    │       1       │Student Registration Begins│
+└────────────┴───────────────┴───────────────────────────┘
+No such course is available
+No such course is available
+Not eligible for graduation due to less semesters passed
+Student's current semester is 8 for gradution
+CGPA is 10.0 which is enough for graduation
+┌──────────────────────────────────────────────────────┐
+│                 CREDITS DISTRIBUTION                 │
+├────────────────────────┬────────┬────────────────────┤
+│      Course Type       │Required│       Earned       │
+├────────────────────────┼────────┼────────────────────┤
+│  Program Core Credits  │  20.0  │        20.0        │
+├────────────────────────┼────────┼────────────────────┤
+│Engineering Core Credits│  20.0  │        20.0        │
+├────────────────────────┼────────┼────────────────────┤
+│    Elective Credits    │  20.0  │        20.0        │
+└────────────────────────┴────────┴────────────────────┘
+Student is NOT eligible for graduation!
+Student's current semester is 8 for gradution
+CGPA is 0.0 which is NOT enough for graduation
+Student's current semester is 8 for gradution
+CGPA is 10.0 which is enough for graduation
+┌──────────────────────────────────────────────────────┐
+│                 CREDITS DISTRIBUTION                 │
+├────────────────────────┬────────┬────────────────────┤
+│      Course Type       │Required│       Earned       │
+├────────────────────────┼────────┼────────────────────┤
+│  Program Core Credits  │  20.0  │        40.0        │
+├────────────────────────┼────────┼────────────────────┤
+│Engineering Core Credits│  20.0  │        20.0        │
+├────────────────────────┼────────┼────────────────────┤
+│    Elective Credits    │  20.0  │        20.0        │
+└────────────────────────┴────────┴────────────────────┘
+Student is Eligible for Gradutaion!
+┌┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┐
+├┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┼┴┴┴┴┴┴┴┤
+│student_id              │course_id│semester│grades│credits│
+├┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┬┼┬┬┬┬┬┬┼┬┬┬┬┬┬┬┤
+├┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┼┴┴┴┴┴┴┴┤
+│2020csb1101@iitrpr.ac.in│CS305    │1       │A     │3.00   │
+├────────────────────────┼─────────┼────────┼──────┼───────┤
+│2020csb1101@iitrpr.ac.in│HS301    │1       │A     │3.00   │
+├────────────────────────┼─────────┼────────┼──────┼───────┤
+│2020csb1101@iitrpr.ac.in│GE111    │1       │A     │3.00   │
+├────────────────────────┼─────────┼────────┼──────┼───────┤
+│2020csb1101@iitrpr.ac.in│CS306    │2       │B     │3.00   │
+└────────────────────────┴─────────┴────────┴──────┴───────┘
+┌┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┐
+├┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┤
+│course_id│title                             │dept_id│req_sem│l  │t  │p  │credits│course_type│batch│
+├┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┼┬┬┬┼┬┬┬┼┬┬┬┼┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┤
+├┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┤
+│CS305    │software Engineering              │CSE    │6      │3.0│3.0│3.0│3.00   │pc         │2020 │
+├─────────┼──────────────────────────────────┼───────┼───────┼───┼───┼───┼───────┼───────────┼─────┤
+│CS305    │software Engineering              │CSE    │6      │3.0│3.0│3.0│2.00   │pc         │2019 │
+├─────────┼──────────────────────────────────┼───────┼───────┼───┼───┼───┼───────┼───────────┼─────┤
+│CS306    │Theory of Computation             │CSE    │6      │3.0│3.0│3.0│3.00   │pc         │2020 │
+├─────────┼──────────────────────────────────┼───────┼───────┼───┼───┼───┼───────┼───────────┼─────┤
+│HS507    │Positive Psychology and well Being│HS     │4      │3.0│3.0│3.0│3.00   │el         │2020 │
+├─────────┼──────────────────────────────────┼───────┼───────┼───┼───┼───┼───────┼───────────┼─────┤
+│HS301    │Industrial Management             │HS     │5      │3.0│3.0│3.0│3.00   │pc         │2020 │
+├─────────┼──────────────────────────────────┼───────┼───────┼───┼───┼───┼───────┼───────────┼─────┤
+│GE111    │Environmental Science             │GE     │4      │3.0│3.0│3.0│3.00   │ec         │2020 │
+├─────────┼──────────────────────────────────┼───────┼───────┼───┼───┼───┼───────┼───────────┼─────┤
+│GE111    │Environmental Science             │GE     │4      │3.0│3.0│3.0│3.00   │el         │2024 │
+├─────────┼──────────────────────────────────┼───────┼───────┼───┼───┼───┼───────┼───────────┼─────┤
+│HS301    │Industrial Management             │HS     │5      │3.0│3.0│3.0│3.00   │el         │2023 │
+├─────────┼──────────────────────────────────┼───────┼───────┼───┼───┼───┼───────┼───────────┼─────┤
+│CS302    │Algorithm Design                  │CSE    │5      │3.0│1.0│0.0│3.00   │PC         │2020 │
+├─────────┼──────────────────────────────────┼───────┼───────┼───┼───┼───┼───────┼───────────┼─────┤
+│DM102    │demo2                             │CSE    │1      │3.0│3.0│3.0│20.00  │pc         │2020 │
+├─────────┼──────────────────────────────────┼───────┼───────┼───┼───┼───┼───────┼───────────┼─────┤
+│DM103    │demo3                             │CSE    │1      │3.0│3.0│3.0│20.00  │ec         │2020 │
+├─────────┼──────────────────────────────────┼───────┼───────┼───┼───┼───┼───────┼───────────┼─────┤
+│DM104    │demo4                             │CSE    │1      │3.0│3.0│3.0│20.00  │el         │2020 │
+├─────────┼──────────────────────────────────┼───────┼───────┼───┼───┼───┼───────┼───────────┼─────┤
+│CP301    │Capstone                          │CSE    │1      │3.0│3.0│3.0│20.00  │pc         │2020 │
+├─────────┼──────────────────────────────────┼───────┼───────┼───┼───┼───┼───────┼───────────┼─────┤
+│DM101    │demo2                             │DM     │1      │3.0│3.0│3.0│3.00   │pc         │2020 │
+├─────────┼──────────────────────────────────┼───────┼───────┼───┼───┼───┼───────┼───────────┼─────┤
+│CS101    │demo2                             │DM     │1      │3.0│3.0│3.0│3.00   │pc         │2020 │
+└─────────┴──────────────────────────────────┴───────┴───────┴───┴───┴───┴───────┴───────────┴─────┘
+┌┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┐
+├┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┤
+│course_id│title               │dept_id│req_sem│l  │t  │p  │credits│course_type│batch│
+├┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┼┬┬┬┼┬┬┬┼┬┬┬┼┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┤
+├┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┤
+│CS305    │software Engineering│CSE    │6      │3.0│3.0│3.0│3.00   │pc         │2020 │
+├─────────┼────────────────────┼───────┼───────┼───┼───┼───┼───────┼───────────┼─────┤
+│CS305    │software Engineering│CSE    │6      │3.0│3.0│3.0│2.00   │pc         │2019 │
+└─────────┴────────────────────┴───────┴───────┴───┴───┴───┴───────┴───────────┴─────┘
+┌┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┐
+├┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┼┴┼┴┼┴┼┴┴┴┴┴┴┴┼┴┴┴┴┴┴┴┴┴┴┴┼┴┴┴┴┴┤
+│course_id│title│dept_id│req_sem│l│t│p│credits│course_type│batch│
+├┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┼┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┼┬┼┬┼┬┼┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┤
+└┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┘
+┌─────────────────────────────────────┐
+│           Change Profile            │
+├──────────────────────┬──────────────┤
+│       Options        │ Enter Choice │
+├──────────────────────┼──────────────┤
+│ Change Profile Name  │      1       │
+├──────────────────────┼──────────────┤
+│Change Profile Contact│      2       │
+└──────────────────────┴──────────────┘
+No such course is available
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

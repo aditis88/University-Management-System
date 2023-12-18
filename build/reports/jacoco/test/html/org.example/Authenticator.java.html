@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Authenticator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AIIMSPortal</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">Authenticator.java</span></div><h1>Authenticator.java</h1><pre class="source lang-java linenums">package org.example;
+
+import java.sql.*;
+
+<span class="fc" id="L5">public class Authenticator {</span>
+
+    public boolean authenticate(String username,String role, String password) {
+        // Retrieve the hashed password from the database for the given username
+<span class="fc" id="L9">        String storedHashedPassword = retrieveHashedPasswordFromDB(username,role);</span>
+
+        // Check if the given password matches the stored hashed password
+<span class="fc" id="L12">        return  (password.equals(storedHashedPassword));</span>
+    }
+
+    private String retrieveHashedPasswordFromDB(String username,String role) {
+        // In a real-world scenario, you would retrieve the hashed password from a database
+        // For the purpose of this example, we'll return a fixed hashed password
+<span class="fc" id="L18">        GetConnection gtCon = new GetConnection();</span>
+<span class="fc" id="L19">        Connection con = gtCon.getConnection();</span>
+
+<span class="fc" id="L21">        String password = &quot;&quot;;</span>
+<span class="fc" id="L22">        String findQuery = &quot;Select password from user_table as u where u.user_id = ? and u.role = ? &quot;;</span>
+        try{
+<span class="fc" id="L24">            PreparedStatement preparedStatement = con.prepareStatement(findQuery);</span>
+<span class="fc" id="L25">            preparedStatement.setString(1,username);</span>
+<span class="fc" id="L26">            preparedStatement.setString(2,role);</span>
+<span class="fc" id="L27">            ResultSet rs = preparedStatement.executeQuery();</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">            if(rs.next())</span>
+            {
+<span class="fc" id="L30">                password = rs.getString(1);</span>
+            }
+            else {
+<span class="fc" id="L33">                System.out.println(&quot;NO user found!!&quot;);</span>
+            }
+<span class="fc" id="L35">            con.close();</span>
+
+<span class="nc" id="L37">        }catch(SQLException e)</span>
+        {
+<span class="nc" id="L39">            System.out.println(e.getMessage());</span>
+<span class="fc" id="L40">        }</span>
+
+<span class="fc" id="L42">        return password;</span>
+    }
+//    public static void main(String[] args)
+//    {
+//        String username = &quot;2020csb1101@iitrpr.ac.in&quot;;
+//        String role = &quot;student&quot;;
+//        String password= &quot;7(G])@&amp;r&quot;;
+//        Authenticator auth = new Authenticator();
+//        boolean ans = auth.authenticate(username,role,password);
+//        System.out.println(ans);
+//
+//    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

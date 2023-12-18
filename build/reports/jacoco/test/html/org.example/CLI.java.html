@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CLI.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AIIMSPortal</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">CLI.java</span></div><h1>CLI.java</h1><pre class="source lang-java linenums">package org.example;
+import de.vandermeer.asciitable.*;
+import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+<span class="nc" id="L8">public class CLI {</span>
+    public static int getMaxColumns(ArrayList&lt;ArrayList&lt;String&gt;&gt; arrayLists) {
+<span class="fc" id="L10">        int maxColumns = 0;</span>
+<span class="fc bfc" id="L11" title="All 2 branches covered.">        for (ArrayList&lt;String&gt; row : arrayLists) {</span>
+<span class="fc bfc" id="L12" title="All 2 branches covered.">            if (row.size() &gt; maxColumns) {</span>
+<span class="fc" id="L13">                maxColumns = row.size();</span>
+            }
+<span class="fc" id="L15">        }</span>
+<span class="fc" id="L16">        return maxColumns;</span>
+    }
+    public static boolean clearScreen()
+    {
+<span class="fc" id="L20">        System.out.print(&quot;\033[H\033[2J&quot;);</span>
+<span class="fc" id="L21">        System.out.flush();</span>
+<span class="fc" id="L22">        return true;</span>
+    }public static boolean inputTaker()
+    {
+<span class="fc" id="L25">        System.out.print(&quot;:~$ &quot;);</span>
+<span class="fc" id="L26">        return true;</span>
+    }
+    public static String removeSpacesCLI(String text)
+    {
+<span class="nc" id="L30">        Pattern pattern = Pattern.compile(&quot;(?m)^\\s*(.*?)\\s*$&quot;);</span>
+<span class="nc" id="L31">        Matcher matcher = pattern.matcher(text);</span>
+<span class="nc" id="L32">        String extractedString = null;</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">        if (matcher.find()) {</span>
+<span class="nc" id="L34">            extractedString = matcher.group(1);</span>
+        }
+<span class="nc" id="L36">        return extractedString;</span>
+    }
+//    private static void printGenericTable(String title, List&lt;String&gt; messages) {
+//        AsciiTable table = new AsciiTable();
+//        table.addRule();
+//        table.addRow(null, title + &quot;: &quot; + messages.size()).getCells().get(1).getContext().setTextAlignment(TextAlignment.CENTER);
+//        table.addRule();
+//        int count = 1;
+//        for (String mess : messages) {
+//            table.addRow(&quot;#&quot; + count, mess).getCells().get(0).getContext().setTextAlignment(TextAlignment.CENTER);
+//            table.addRule();
+//            count ++;
+//        }
+//        table.getContext().setGrid(A7_Grids.minusBarPlusEquals());
+//        table.getRenderer().setCWC(new CWC_LongestWordMin(new int[]{5, 101}));
+//        table.renderAsCollection().forEach(SDLogger::info);
+//    }
+//    public static boolean printMenu(ArrayList&lt;ArrayList&lt;String&gt;&gt; arr)
+//    {
+//        AsciiTable table = new AsciiTable();
+//        int sz = arr.size();
+//        int cnt = 0;
+//        int maxColumns = getMaxColumns(arr);
+////        System.out.println(sz);
+//
+//        for(ArrayList&lt;String&gt; row: arr)
+//        {
+//            cnt = 0;
+//            table.addRule();
+//            List&lt;String&gt; list = new ArrayList&lt;&gt;();
+//            for(String s :row)
+//            {
+//                list.add(s);
+//                cnt++;
+//            }
+//            while(cnt&lt;maxColumns)
+//            {
+//                cnt++;
+//                list.add(&quot;NULL&quot;);
+//            }
+////            System.out.println(list);
+//            table.addRow(list).setTextAlignment(TextAlignment.CENTER);
+//        }
+//
+//        table.addRule();
+//
+//        table.getRenderer().setCWC(new CWC_LongestLine());
+//
+//        System.out.println(table.render());
+//        return true;
+//    }
+    public static boolean printMenu(String title,ArrayList&lt;ArrayList&lt;String&gt;&gt; arr)
+    {
+<span class="fc" id="L89">        AsciiTable table = new AsciiTable();</span>
+<span class="fc" id="L90">        int sz = arr.size();</span>
+<span class="fc" id="L91">        int cnt = 0;</span>
+<span class="fc" id="L92">        int maxColumns = getMaxColumns(arr);</span>
+
+<span class="fc" id="L94">        table.addRule();</span>
+<span class="fc bfc" id="L95" title="All 2 branches covered.">        if(maxColumns == 2)</span>
+        {
+<span class="fc" id="L97">            table.addRow(null,title).setTextAlignment(TextAlignment.CENTER);</span>
+        }
+<span class="fc bfc" id="L99" title="All 2 branches covered.">        if(maxColumns == 3)</span>
+        {
+<span class="fc" id="L101">            table.addRow(null,null,title).setTextAlignment(TextAlignment.CENTER);</span>
+        }
+
+//        System.out.println(sz);
+
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        for(ArrayList&lt;String&gt; row: arr)</span>
+        {
+<span class="fc" id="L108">            cnt = 0;</span>
+<span class="fc" id="L109">            table.addRule();</span>
+<span class="fc" id="L110">            List&lt;String&gt; list = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L111" title="All 2 branches covered.">            for(String s :row)</span>
+            {
+<span class="fc" id="L113">                list.add(s);</span>
+<span class="fc" id="L114">                cnt++;</span>
+<span class="fc" id="L115">            }</span>
+<span class="pc bpc" id="L116" title="1 of 2 branches missed.">            while(cnt&lt;maxColumns)</span>
+            {
+<span class="nc" id="L118">                cnt++;</span>
+<span class="nc" id="L119">                list.add(&quot;NULL&quot;);</span>
+            }
+//            System.out.println(list);
+<span class="fc" id="L122">            table.addRow(list).setTextAlignment(TextAlignment.CENTER);</span>
+<span class="fc" id="L123">        }</span>
+<span class="fc" id="L124">        table.addRule();</span>
+<span class="fc" id="L125">        table.getRenderer().setCWC(new CWC_LongestLine());</span>
+<span class="fc" id="L126">        System.out.println(table.render());</span>
+<span class="fc" id="L127">        return true;</span>
+    }
+
+    public static String getFormedTable(String title,ArrayList&lt;ArrayList&lt;String&gt;&gt; arr)
+    {
+<span class="fc" id="L132">        AsciiTable table = new AsciiTable();</span>
+<span class="fc" id="L133">        int sz = arr.size();</span>
+<span class="fc" id="L134">        int cnt = 0;</span>
+<span class="fc" id="L135">        int maxColumns = getMaxColumns(arr);</span>
+
+<span class="fc" id="L137">        table.addRule();</span>
+<span class="pc bpc" id="L138" title="1 of 2 branches missed.">        if(maxColumns == 2)</span>
+        {
+<span class="nc" id="L140">            table.addRow(null,title).setTextAlignment(TextAlignment.CENTER);</span>
+        }
+<span class="pc bpc" id="L142" title="1 of 2 branches missed.">        if(maxColumns == 3)</span>
+        {
+<span class="fc" id="L144">            table.addRow(null,null,title).setTextAlignment(TextAlignment.CENTER);</span>
+        }
+
+//        System.out.println(sz);
+
+<span class="fc bfc" id="L149" title="All 2 branches covered.">        for(ArrayList&lt;String&gt; row: arr)</span>
+        {
+<span class="fc" id="L151">            cnt = 0;</span>
+<span class="fc" id="L152">            table.addRule();</span>
+<span class="fc" id="L153">            List&lt;String&gt; list = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L154" title="All 2 branches covered.">            for(String s :row)</span>
+            {
+<span class="fc" id="L156">                list.add(s);</span>
+<span class="fc" id="L157">                cnt++;</span>
+<span class="fc" id="L158">            }</span>
+<span class="pc bpc" id="L159" title="1 of 2 branches missed.">            while(cnt&lt;maxColumns)</span>
+            {
+<span class="nc" id="L161">                cnt++;</span>
+<span class="nc" id="L162">                list.add(&quot;NULL&quot;);</span>
+            }
+//            System.out.println(list);
+<span class="fc" id="L165">            table.addRow(list).setTextAlignment(TextAlignment.CENTER);</span>
+<span class="fc" id="L166">        }</span>
+<span class="fc" id="L167">        table.addRule();</span>
+<span class="fc" id="L168">        table.getRenderer().setCWC(new CWC_LongestLine());</span>
+//        System.out.println(table.render());
+<span class="fc" id="L170">        return table.render();</span>
+    }
+
+//    public static void main(String[] args)
+//    {
+//        ArrayList&lt;ArrayList&lt;String&gt;&gt; arr = new ArrayList&lt;&gt;();
+//        ArrayList&lt;ArrayList&lt;String&gt;&gt; data = new ArrayList&lt;&gt;();
+//        ArrayList&lt;String&gt; row1 = new ArrayList&lt;&gt;();
+//        row1.add(&quot;John&quot;);
+//        row1.add(&quot;Doe&quot;);
+//        row1.add(&quot;25&quot;);
+//        data.add(row1);
+//        ArrayList&lt;String&gt; row2 = new ArrayList&lt;&gt;();
+//        row2.add(&quot;Jane&quot;);
+//        row2.add(&quot;Doe&quot;);
+//        row2.add(&quot;25&quot;);
+//        data.add(row2);
+//        printMenu(&quot;Title&quot;,data);
+//
+////        ArrayList&lt;String&gt; row3 = new ArrayList&lt;&gt;();
+////        row3.add(&quot;John&quot;);
+////        row3.add(&quot;Doe&quot;);
+////        arr.add(row3);
+////
+////        printMenu(arr);
+//
+//    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
