@@ -1,0 +1,2 @@
+-- INSERT INTO contacts (contact_id, last_name, first_name, country) VALUES (250, 'Anderson', 'Jane', DEFAULT);
+--INSERT INTO user_table (user_id,role,password) values ('2020csb1076',0,'123456');

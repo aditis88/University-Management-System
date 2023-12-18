@@ -1,0 +1,43 @@
+course_id, title,dept_id, req_sem,l,t,p,credits,course_type,batch
+cs101,Discrete Mathematics,CSE,3,1,0		PC	2020
+cs201	Data Structures	3,1,2	ge103	PC	2020
+cs202	Programming Paradigms and Pragmatics	3,1,2	cs201	PC	2020
+cs203	Digital Logic Design	3,1,2		PC	2020
+cs204	Computer Architecture	3,1,2	cs203,ge103	PC	2020
+cs301	Database and Management Systems	3,1,2	cs201	PC	2020
+cs302	Algorithm Design	3,1,0	cs101, cs201	PC	2020
+cs303	Operating Systems	3,1,2	cs201	PC	2020
+cs304	Computer Networks	3,1,2	cs201	PC	2020
+cs305	Software Engineering	3,1,2	cs301,cs303	PC	2020
+cs306	Theory of Computation	3,1,0	cs101 	PC	2020
+MA202	Probability and Statistics	3,0,0		EC	2020
+HS202	Human Geography and Social Needs	1,3,4		EC	2020
+GE103	Introduction to Computing and Data Structures	3,0,3		EC	2020
+GE108	Basic Electronics	2,2,2		EC	2020
+GE109	Introduction to Engineering Products	0,0,1		EC	2020
+GE105	Engineering Drawing	0,0,3		EC	2020
+HS301	Industrial Management 	3,1,0		EC	2020
+HS505	Sound patterns in human language	3,0,0		E	2020
+Hs506	Brain and Language	3,0,0		E	2020
+HS507	Positive Psychology & Wellbeing	3,0,0		E	2020
+HS475	An Introduction to Fantasy and Science Fiction	3,0,0		E	2020
+HS491	Cine Politics and National Emergency	3,0,0		E	2020
+HS406	Managerial Science	3,0,0		E	2020
+HS463	Financial Markets and Institutions	3,0,0		E	2020
+HS405	Chinese Level A1	3,0,0		E	2020
+MA703	Computational PDE	3,1,2		E	2020
+MA628	Financial Derivatives Pricing	3,0,2		E	2020
+MA605	Introduction to Non-linear Dynamics	3,0,0		E	2020
+MA517	Distributed Algorithms	3,0,0		E	2020
+MA302	Optimization Techniques	3,1,0		E	2020
+MA421	Topics in Complex Analysis	3,1,0		E	2020
+PH457	Engineering Photonics	3,0,0		E	2020
+PH451	Thermal & Statistical Physics	3,1,0		E	2020
+PH612	Thin-Film Science and Technology	3,0,0		E	2020
+BM607	Medical Devices and Equipment	3,0,2		E	2020
+BM609	Physics of Medical Imaging	3,0,2		E	2020
+BM614	Immunology and Infection	3,0,0		E	2020
+BM612	Tissue Engineering and Regenerative Medicine	3,0,0		E	2020
+CY427	Interpretive Molecular Spectroscopy	3,0,0		E	2020
+CY452	Material Chemisrty	3,0,0		E	2020
+CY516	Non- Equilibrium statistical mechanics	3,0,0		E	2020

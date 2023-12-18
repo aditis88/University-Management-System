@@ -1,0 +1,10 @@
+dept_name,dept_id,building
+Civil,CE,block1
+Chemical,CHE,block2
+Computer Science,CSE,block3
+Electrical,EE,block4
+Maths and Computing,MCE,block5
+Mechanical, ME, block6
+Metallurgy,MME,block7
+Humanities,HS,block8
+General Engineering,GE,block9

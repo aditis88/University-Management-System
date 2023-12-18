@@ -1,0 +1,4 @@
+course_id,prereq_id
+cs302,cs101
+cs302 ,cs201
+cs201 ,ge103

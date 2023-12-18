@@ -1,0 +1,7 @@
+course_id, title,dept_id, req_sem,l,t,p,credits
+CS305,software Engineering,CSE,6,3,3,3,3
+CS306,Theory of Computation,CSE,6,3,3,3,3
+HS507,Positive Psychology and well Being,HS,4,3,3,3,3
+GE111,Environmental Science,GE,4,3,3,3,3
+HS301,Industrial Management,HS,5,3,3,3,3
+CS302,Algorithm Design,CSE,5,3,1,0,3

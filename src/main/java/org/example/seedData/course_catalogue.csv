@@ -1,0 +1,11 @@
+course_id, title,dept_id, req_sem,l,t,p,credits,course_type,batch
+CS305,software Engineering,CSE,6,3,3,3,3,pc,2020
+CS305,software Engineering,CSE,6,3,3,3,2,pc,2019
+CS306,Theory of Computation,CSE,6,3,3,3,3,pc,2020
+HS507,Positive Psychology and well Being,HS,4,3,3,3,3,el,2020
+HS301,Industrial Management,HS,5,3,3,3,3,pc,2020
+GE111,Environmental Science,GE,4,3,3,3,3,ec,2020
+GE111,Environmental Science,GE,4,3,3,3,3,el,2024
+HS301,Industrial Management,HS,5,3,3,3,3,el,2023
+CS302,Algorithm Design,CSE,5,3,1,0,3,PC,2020
+CS101,Discrete Mathamatics,CSE,1,3,3,3,3,pc,2020
